@@ -1,0 +1,32 @@
+baseURL = "https://gmaurotl.com/"
+languageCode = "en-us"
+title = "Mauro Gonzalo Tarazona Lévano"
+theme = "PaperMod"
+
+[params]
+  author = "Mauro Gonzalo Tarazona Lévano"
+  description = "PhD researcher in wireless communications, 5G/6G and AI-based channel modeling"
+
+[menu]
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 1
+
+  [[menu.main]]
+    name = "Research"
+    url = "/research/"
+    weight = 2
+
+  [[menu.main]]
+    name = "Publications"
+    url = "/publications/"
+    weight = 3
+
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 4
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
