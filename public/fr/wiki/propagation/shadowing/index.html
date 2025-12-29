@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Large-Scale Fading: Shadowing | Mauro Gonzalo Tarazona Lévano</title>
+<meta name="keywords" content="">
+<meta name="description" content="An overview of shadowing effects in wireless channels and log-normal modeling.">
+<meta name="author" content="Mauro Gonzalo Tarazona Lévano">
+<link rel="canonical" href="http://localhost:1313/fr/wiki/propagation/shadowing/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/wiki/propagation/shadowing/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/es/wiki/propagation/shadowing/">
+<link rel="alternate" hreflang="fr" href="http://localhost:1313/fr/wiki/propagation/shadowing/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      { left: '$$',  right: '$$',  display: true  },
+      { left: '\\\\[', right: '\\\\]', display: true  },
+      { left: '\\\\(', right: '\\\\)', display: false },
+      { left: '$',   right: '$',   display: false }
+    ],
+    throwOnError: false,
+    ignoredTags: ['script','noscript','style','textarea','pre','code']
+  });"></script>
+
+
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/fr/" accesskey="h" title="Accueil (Alt + H)">Accueil</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                    <ul class="lang-switch"><li>|</li>
+                        <li>
+                            <a href="http://localhost:1313/" title="EN 🇺🇸"
+                                aria-label="EN 🇺🇸">EN 🇺🇸</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:1313/es/" title="ES 🇪🇸"
+                                aria-label="ES 🇪🇸">ES 🇪🇸</a>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/fr/about/" title="About">
+                    <span>À propos</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/fr/research/" title="Research">
+                    <span>Recherche</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/fr/publications/" title="Publications">
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/fr/blog/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/fr/wiki/" title="Knowledge Base">
+                    <span>Wiki</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Large-Scale Fading: Shadowing
+    </h1>
+    <div class="post-meta"><span title='2025-12-28 00:00:00 +0000 UTC'>28 décembre 2025</span>&nbsp;·&nbsp;<span>Mauro Gonzalo Tarazona Lévano</span>&nbsp;|&nbsp;<span>Traductions:</span>
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/wiki/propagation/shadowing/">EN 🇺🇸</a>
+    </li>
+    <li>
+        <a href="http://localhost:1313/es/wiki/propagation/shadowing/">ES 🇪🇸</a>
+    </li>
+</ul>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="1-what-is-shadow-fading-and-what-it-is-not">1) What is Shadow Fading (and what it is not)<a hidden class="anchor" aria-hidden="true" href="#1-what-is-shadow-fading-and-what-it-is-not">#</a></h2>
+<p>Shadow fading (often called <em>shadowing</em> or <em>SF</em>) represents <strong>medium-scale fluctuations</strong> of the received signal strength produced by obstacles in the propagation path (buildings, trees, street furniture, etc.). It varies <strong>slowly with position</strong>, typically over distances comparable to the size of the dominant obstructions.</p>
+<p>It sits between:</p>
+<ul>
+<li><strong>Path loss (PL):</strong> the deterministic/mean trend vs. distance and scenario (UMa/UMi, LoS/NLoS, etc.).</li>
+<li><strong>Fast fading (FF):</strong> rapid fluctuations due to multipath interference (small-scale), varying over fractions of a wavelength and across frequency/time/antennas.</li>
+</ul>
+<p>A practical mental model:</p>
+<ul>
+<li>PL sets the <em>slope</em> (distance-dependent mean).</li>
+<li>SF adds a <em>slow random offset</em> around that slope (spatially smooth).</li>
+<li>FF adds <em>rapid ripples</em> around the local mean.</li>
+</ul>
+<hr>
+<h2 id="2-standard-log-normal-model-sf-in-db-is-gaussian">2) Standard log-normal model (SF in dB is Gaussian)<a hidden class="anchor" aria-hidden="true" href="#2-standard-log-normal-model-sf-in-db-is-gaussian">#</a></h2>
+<p>In wireless communications, shadowing is commonly modeled as <strong>log-normal in linear scale</strong>, which is equivalent to a <strong>Gaussian random variable in dB</strong>:</p>
+<p>$$
+P_r(d) = P_t - PL(d) + X_\sigma
+$$</p>
+<p>where:</p>
+<ul>
+<li>$P_t$ is the transmitted power (in dB units, e.g., dBm),</li>
+<li>$PL(d)$ is the path loss at distance $d$ (in dB),</li>
+<li>$X_\sigma \sim \mathcal{N}(0,\sigma^2)$ is the shadow fading term in dB.</li>
+</ul>
+<p>In linear scale, if we define the multiplicative shadowing factor</p>
+<p>$$
+S = 10^{X_\sigma/10},
+$$</p>
+<p>then $S$ is log-normal.</p>
+<hr>
+<h2 id="3-spatial-correlation-correlation-distance-matters">3) Spatial correlation: correlation distance matters<a hidden class="anchor" aria-hidden="true" href="#3-spatial-correlation-correlation-distance-matters">#</a></h2>
+<p>Shadow fading is not i.i.d. in space: <strong>nearby positions share similar obstructions</strong>, so SF is spatially correlated.</p>
+<p>A widely used model is an exponential autocorrelation:</p>
+<p>$$
+\mathrm{Corr}{X_\sigma(\mathbf{u}), X_\sigma(\mathbf{v})} =
+\exp\left(-\frac{|\mathbf{u}-\mathbf{v}|}{d_\mathrm{corr}}\right)
+$$</p>
+<p>where $d_\mathrm{corr}$ is the <strong>correlation distance</strong> (scenario-dependent).</p>
+<p>Interpretation:</p>
+<ul>
+<li>If $|\mathbf{u}-\mathbf{v}| \ll d_\mathrm{corr}$, shadowing is strongly correlated.</li>
+<li>If $|\mathbf{u}-\mathbf{v}| \gg d_\mathrm{corr}$, shadowing becomes almost independent.</li>
+</ul>
+<p>This is essential when you want realistic maps: SF should look like a <strong>smooth random field</strong>, not pixel-level noise.</p>
+<hr>
+<h2 id="4-shadowing-as-an-lsp-in-3gpp-tr-38901">4) Shadowing as an LSP in 3GPP TR 38.901<a hidden class="anchor" aria-hidden="true" href="#4-shadowing-as-an-lsp-in-3gpp-tr-38901">#</a></h2>
+<p>In TR 38.901, SF is part of the <strong>Large-Scale Parameters (LSPs)</strong> family (together with DS, ASD, ASA, K, ZSD, ZSA, etc.).</p>
+<p>Two key ideas:</p>
+<h3 id="41-cross-correlation-between-different-lsp-components-per-link">4.1 Cross-correlation between different LSP components (per link)<a hidden class="anchor" aria-hidden="true" href="#41-cross-correlation-between-different-lsp-components-per-link">#</a></h3>
+<p>For a given BS–UT link, the LSP vector is sampled so that components are <strong>mutually correlated</strong> (e.g., SF correlated with DS, etc.). This is typically done by starting from a Gaussian vector and applying a correlation matrix (e.g., via Cholesky). Sionna follows this idea when generating the LSP realization per link.</p>
+<h3 id="42-spatial-correlation-of-each-lsp-component-across-uts">4.2 Spatial correlation of each LSP component (across UTs)<a hidden class="anchor" aria-hidden="true" href="#42-spatial-correlation-of-each-lsp-component-across-uts">#</a></h3>
+<p>Across multiple UT positions, each LSP component is also <strong>spatially autocorrelated</strong>, such that UTs near each other share similar LSP values (including SF). This is what makes channel snapshots coherent over space.</p>
+<hr>
+<h2 id="5-how-sionna-puts-everything-together-pl-sf-and-h_freq">5) How Sionna puts everything together (PL, SF, and h_freq)<a hidden class="anchor" aria-hidden="true" href="#5-how-sionna-puts-everything-together-pl-sf-and-h_freq">#</a></h2>
+<p>Sionna internally builds a <em>Scenario</em> (UMaScenario/UMiScenario/…) and exposes a channel model <code>cm</code>. The scenario contains geometry, LoS/NLoS states, and the TR 38.901 parameter tables (often stored in JSON internally).</p>
+<h3 id="51-model-path-loss-tr-38901-vs-sampled-path-loss-with-o2i">5.1 Model path loss (TR 38.901) vs. sampled path loss (with O2I)<a hidden class="anchor" aria-hidden="true" href="#51-model-path-loss-tr-38901-vs-sampled-path-loss-with-o2i">#</a></h3>
+<ul>
+<li><code>cm._scenario.basic_pathloss</code> gives the <strong>basic path loss</strong> from the scenario formulas (TR 38.901).</li>
+<li><code>cm._lsp_sampler.sample_pathloss()</code> gives the <strong>full path loss</strong> used by the LSP sampler (basic PL + possible O2I). For outdoor-only simulations, O2I is typically zero, so both are often close.</li>
+</ul>
+<h3 id="52-lsp-realization-including-sf-conditions-the-small-scale-fading">5.2 LSP realization (including SF) conditions the small-scale fading<a hidden class="anchor" aria-hidden="true" href="#52-lsp-realization-including-sf-conditions-the-small-scale-fading">#</a></h3>
+<p>Sionna generates one realization of the LSP vector per BS–UT link and stores it (e.g., in <code>cm._lsp.sf</code>, <code>cm._lsp.ds</code>, etc.). This realization is what conditions the statistics of the fast fading process.</p>
+<p>Important conceptual point:</p>
+<ul>
+<li>LSPs are the <strong>slow variables</strong> (random but slowly varying over space).</li>
+<li>Fast fading is a <strong>random process conditioned on LSPs</strong>: you can generate many FF realizations while keeping the same LSP realization fixed, until you move far enough or re-sample LSPs.</li>
+</ul>
+<h3 id="53-h_freq-already-embeds-pl--sf--ff">5.3 h_freq already embeds PL + SF + FF<a hidden class="anchor" aria-hidden="true" href="#53-h_freq-already-embeds-pl--sf--ff">#</a></h3>
+<p>After sampling PL and SF, Sionna scales the small-scale channel with a gain factor (often denoted conceptually as $g$), producing a frequency-domain channel (<code>h_freq</code> or <code>h_full</code>) that <strong>already contains PL + SF + FF</strong>.</p>
+<hr>
+<h2 id="6-sample_pathloss-vs-get_pathlossh_freq-very-common-confusion">6) <code>sample_pathloss()</code> vs. <code>get_pathloss(h_freq)</code> (very common confusion)<a hidden class="anchor" aria-hidden="true" href="#6-sample_pathloss-vs-get_pathlossh_freq-very-common-confusion">#</a></h2>
+<p>Sionna gives you two “path loss-like” objects:</p>
+<h3 id="61-model-path-loss-from-tr-38901">6.1 Model path loss (from TR 38.901)<a hidden class="anchor" aria-hidden="true" href="#61-model-path-loss-from-tr-38901">#</a></h3>
+<p>$$
+PL_{\mathrm{model}} \approx \text{sample\_pathloss}(cm)
+$$</p>
+<p>In Sionna: <code>cm._lsp_sampler.sample_pathloss()</code></p>
+<p>This is the loss used by the model to scale the channel (Step 12 in the TR 38.901 flow).</p>
+<h3 id="62-effective-path-loss-estimated-from-the-realized-channel">6.2 Effective path loss estimated from the realized channel<a hidden class="anchor" aria-hidden="true" href="#62-effective-path-loss-estimated-from-the-realized-channel">#</a></h3>
+<p><code>get_pathloss(h_freq)</code> computes an effective loss by:</p>
+<ol>
+<li>computing a mean channel power (averaging over subcarriers and antennas), and</li>
+<li>converting it to dB as a negative log measure.</li>
+</ol>
+<p>Conceptually:</p>
+<p>$$
+PL_\text{eff}(h_\text{freq}) \triangleq -10\log_{10}\left(\mathbb{E}{|h_\text{freq}|^2}\right)
+$$</p>
+<p>(with the expectation implemented by a finite average across dimensions).</p>
+<p>Key implication:</p>
+<ul>
+<li>$PL_\text{eff}$ includes <strong>PL + SF + residual effects of FF</strong>, and can also reflect array/pattern/orientation effects that sit inside the realized channel.</li>
+</ul>
+<p>So, a useful approximation is:</p>
+<p>$$
+PL_\text{eff} \approx PL_\text{model} + SF + \varepsilon
+$$</p>
+<p>where $\varepsilon$ is not “just fast fading”; it includes finite-averaging error, residual small-scale energy, antenna pattern/orientation effects, and OFDM normalization offsets.</p>
+<hr>
+<h2 id="7-how-to-isolate-shadow-fading-practically">7) How to isolate Shadow Fading (practically)<a hidden class="anchor" aria-hidden="true" href="#7-how-to-isolate-shadow-fading-practically">#</a></h2>
+<p>If your goal is a <strong>shadowing map</strong> (slow variations), the strategy is:</p>
+<ol>
+<li>Compute $PL_\text{model}$ from the model:
+<ul>
+<li><code>pl_db = cm._lsp_sampler.sample_pathloss()</code> (or <code>basic_pathloss</code> if you explicitly want the basic PL)</li>
+</ul>
+</li>
+<li>Estimate $PL_\text{eff}$ from the realized channel:
+<ul>
+<li><code>pl_eff_db = get_pathloss(h_freq)</code></li>
+</ul>
+</li>
+<li>Take the difference:</li>
+</ol>
+<p>$$
+SF_\text{est} \approx PL_\text{eff} - PL_\text{model}
+$$</p>
+<p>Caveat (important): the difference will be “SF + residuals” unless you average enough independent samples to suppress FF.</p>
+<hr>
+<h2 id="8-fast-fading-narrowband-vs-wideband-power-a-robust-trick">8) Fast fading: narrowband vs wideband power (a robust trick)<a hidden class="anchor" aria-hidden="true" href="#8-fast-fading-narrowband-vs-wideband-power-a-robust-trick">#</a></h2>
+<p>If you only have access to <code>h_freq</code>, one robust way to characterize FF is to compare:</p>
+<ul>
+<li><strong>Narrowband power</strong> (one resource element, average over antennas)</li>
+<li><strong>Wideband/local mean power</strong> (average over time/frequency/antennas in a window that spans many independent samples, but stays inside a region where LSPs are constant)</li>
+</ul>
+<p>Define:</p>
+<p>$$
+P_\text{NB}(t_0,f_0)=\frac{1}{N}\sum_{n=1}^N |h(t_0,f_0,n)|^2
+$$</p>
+<p>and</p>
+<p>$$
+P_\text{WB}=\frac{1}{TFN}\sum_{t\in\mathcal{T}}\sum_{f\in\mathcal{F}}\sum_{n=1}^N |h(t,f,n)|^2
+$$</p>
+<p>Then:</p>
+<p>$$
+FF_\text{dB}(t_0,f_0)=10\log_{10}\left(\frac{P_\text{NB}(t_0,f_0)}{P_\text{WB}}\right)
+$$</p>
+<p>Why this is nice:</p>
+<ul>
+<li>The ratio cancels the slow gain $g(\mathbf{u})$ (PL + SF), leaving a dimensionless measure of “how above/below the local mean” a given RE is.</li>
+</ul>
+<p>Condition for it to behave as true FF:</p>
+<ul>
+<li>$P_\text{WB}$ should average enough independent samples (wider than coherence bandwidth/time, low antenna correlation), <strong>without moving too far</strong> such that LSPs change.</li>
+</ul>
+<hr>
+<h2 id="9-practical-checklist-so-your-maps-look-physically-consistent">9) Practical checklist (so your maps look physically consistent)<a hidden class="anchor" aria-hidden="true" href="#9-practical-checklist-so-your-maps-look-physically-consistent">#</a></h2>
+<ul>
+<li>If you plot “shadowing”, make sure you’re not accidentally plotting a <strong>residual of averaged fast fading</strong>.</li>
+<li>If you estimate from <code>h_freq</code>, increase averaging (subcarriers, OFDM symbols, antennas, Monte Carlo) until the residual becomes smooth.</li>
+<li>Keep in mind: antenna pattern/orientation can leak into $PL_\text{eff}$ when estimated from <code>h_freq</code>.</li>
+<li>When comparing LoS vs NLoS, expect different SF variance and different spatial behavior (scenario-dependent).</li>
+</ul>
+<hr>
+<h2 id="10-what-to-explore-next">10) What to explore next<a hidden class="anchor" aria-hidden="true" href="#10-what-to-explore-next">#</a></h2>
+<ul>
+<li><strong>Correlation distance:</strong> estimate $d_\mathrm{corr}$ empirically from SF realizations across UT positions.</li>
+<li><strong>3GPP modeling:</strong> contrast SF statistics between UMa and UMi (LoS/NLoS).</li>
+<li><strong>Validation with Sionna internals:</strong> use <code>cm._lsp.sf</code> as the reference SF realization and compare with your SF estimate from <code>h_freq</code>.</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/fr/">Mauro Gonzalo Tarazona Lévano</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

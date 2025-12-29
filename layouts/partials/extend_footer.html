@@ -1,0 +1,13 @@
+<script>
+  // Bloquea clic derecho
+  document.addEventListener("contextmenu", (e) => e.preventDefault(), { capture: true });
+
+  // Bloquea atajos típicos: Guardar (S), Ver código (U)
+  document.addEventListener("keydown", function(e) {
+    const key = (e.key || "").toLowerCase();
+    const ctrlOrCmd = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) o Cmd (Mac)
+    if (ctrlOrCmd && (key === "s" || key === "u")) {
+      e.preventDefault();
+    }
+  }, { capture: true });
+</script>

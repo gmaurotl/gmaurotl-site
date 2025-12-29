@@ -1,32 +1,212 @@
 baseURL = "https://gmaurotl.com/"
 languageCode = "en-us"
-title = "Mauro Gonzalo Tarazona Lévano"
+title = "Mauro G. Tarazona Lévano"
 theme = "PaperMod"
 
-[params]
-  author = "Mauro Gonzalo Tarazona Lévano"
-  description = "PhD researcher in wireless communications, 5G/6G and AI-based channel modeling"
+# Multilenguaje
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+disableLanguages = ["fr"] # ["es", "fr"]  # deja solo ES visible
 
-[menu]
-  [[menu.main]]
-    name = "About"
-    url = "/about/"
+
+[params]
+  defaultTheme = "auto"
+  author = "Mauro Gonzalo Tarazona Lévano"
+  description = "PhD researcher in Generative AI in wireless communications 5G/6G"
+  math = true # global (tu partial usa .Params.math por página)
+
+  # PaperMod: selector de idioma
+  ShowLanguageSwitcher = true
+  displayFullLangName = true
+
+    # hidePoweredBy = true
+    # ShowPoweredBy = false
+    # hideFooter = false
+
+  [params.label]
+    text = "Home"
+    icon = ""
+    iconHeight = 35
+
+  [params.profileMode]
+    enabled = true
+    title = "Mauro Gonzalo Tarazona Lévano"
+    subtitle = "PhD Researcher | Wireless Communications & Generative AI | 5G/6G"
+    imageUrl = "/avatar.jpeg"
+    imageTitle = "Mauro Tarazona"
+    imageWidth = 150
+    imageHeight = 210
+
+    [[params.profileMode.buttons]]
+      name = "Research"
+      url = "/research/"
+
+    [[params.profileMode.buttons]]
+      name = "Publications"
+      url = "/publications/"
+
+    [[params.profileMode.buttons]]
+      name = "Wiki"
+      url = "/wiki/"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/gmaurotl"
+
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:mgtarlev@iteam.upv.es"
+
+# Menús por idioma (con pageRef para que apunten a la traducción correcta)
+[languages]
+
+  [languages.en]
+    languageName = "EN 🇺🇸"
+    languageCode = "en-us"
     weight = 1
 
-  [[menu.main]]
-    name = "Research"
-    url = "/research/"
+    [[languages.en.menu.main]]
+      name = "About"
+      pageRef = "about"
+      weight = 1
+
+    [[languages.en.menu.main]]
+      name = "Research"
+      pageRef = "research"
+      weight = 2
+
+    [[languages.en.menu.main]]
+      name = "Publications"
+      pageRef = "publications"
+      weight = 3
+
+    [[languages.en.menu.main]]
+      name = "Blog"
+      pageRef = "blog"
+      weight = 4
+
+    [[languages.en.menu.main]]
+      name = "Wiki"
+      pageRef = "wiki"
+      weight = 5
+
+
+  [languages.es]
+    languageName = "ES 🇪🇸"
+    languageCode = "es-es"
     weight = 2
 
-  [[menu.main]]
-    name = "Publications"
-    url = "/publications/"
+    # Opcional: traduce label y subtítulo del perfil
+    [languages.es.params.label]
+      text = "Inicio"
+      icon = ""
+      iconHeight = 35
+
+    [languages.es.params.profileMode]
+      enabled = true
+      title = "Mauro Gonzalo Tarazona Lévano"
+      subtitle = "Doctorando | Comunicaciones Inalámbricas & IA Generativa | 5G/6G"
+      imageUrl = "/avatar.jpeg"
+      imageTitle = "Mauro Tarazona"
+      imageWidth = 150
+      imageHeight = 210
+
+      [[languages.es.params.profileMode.buttons]]
+        name = "Investigación"
+        url = "/es/research/"
+
+      [[languages.es.params.profileMode.buttons]]
+        name = "Publicaciones"
+        url = "/es/publications/"
+
+      [[languages.es.params.profileMode.buttons]]
+        name = "Wiki"
+        url = "/es/wiki/"
+
+    [[languages.es.menu.main]]
+      name = "Sobre mí"
+      pageRef = "about"
+      weight = 1
+
+    [[languages.es.menu.main]]
+      name = "Investigación"
+      pageRef = "research"
+      weight = 2
+
+    [[languages.es.menu.main]]
+      name = "Publicaciones"
+      pageRef = "publications"
+      weight = 3
+
+    [[languages.es.menu.main]]
+      name = "Blog"
+      pageRef = "blog"
+      weight = 4
+
+    [[languages.es.menu.main]]
+      name = "Wiki"
+      pageRef = "Wiki"
+      weight = 5
+
+
+  [languages.fr]
+    languageName = "FR 🇫🇷"
+    languageCode = "fr-fr"
     weight = 3
 
-  [[menu.main]]
-    name = "Blog"
-    url = "/blog/"
-    weight = 4
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+    # Opcional: traduce label y subtítulo del perfil
+    [languages.fr.params.label]
+      text = "Accueil"
+      icon = ""
+      iconHeight = 35
+
+    [languages.fr.params.profileMode]
+      enabled = true
+      title = "Mauro Gonzalo Tarazona Lévano"
+      subtitle = "Doctorant | Communications sans fil & IA générative | 5G/6G"
+      imageUrl = "/avatar.jpeg"
+      imageTitle = "Mauro Tarazona"
+      imageWidth = 150
+      imageHeight = 210
+
+      [[languages.fr.params.profileMode.buttons]]
+        name = "Recherche"
+        url = "/fr/research/"
+
+      [[languages.fr.params.profileMode.buttons]]
+        name = "Publications"
+        url = "/fr/publications/"
+
+      [[languages.fr.params.profileMode.buttons]]
+        name = "Wiki"
+        url = "/fr/wiki/"
+
+    [[languages.fr.menu.main]]
+      name = "À propos"
+      pageRef = "about"
+      weight = 1
+
+    [[languages.fr.menu.main]]
+      name = "Recherche"
+      pageRef = "research"
+      weight = 2
+
+    [[languages.fr.menu.main]]
+      name = "Publications"
+      pageRef = "publications"
+      weight = 3
+
+    [[languages.fr.menu.main]]
+      name = "Blog"
+      pageRef = "blog"
+      weight = 4
+
+    [[languages.fr.menu.main]]
+      name = "Wiki"
+      pageRef = "wiki"
+      weight = 5
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

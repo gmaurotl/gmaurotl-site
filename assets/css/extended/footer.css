@@ -1,0 +1,14 @@
+/* Footer PaperMod: mantener copyright, ocultar "Powered by ..." */
+footer.footer > span:last-child {
+  display: none !important;
+}
+
+/* Quitar el separador " · " (es un text node), ocultándolo con font-size:0 en el footer */
+footer.footer {
+  font-size: 0;
+}
+
+/* Volver a dar tamaño al copyright (primer span) */
+footer.footer > span:first-child {
+  font-size: 0.95rem;
+}
